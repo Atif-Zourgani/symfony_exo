@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang=fr>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% include 'commons/_header.html.twig' %}
+        <main>
+        {% block body %}{% endblock %}
+        </main>
+        {% include 'commons/_footer.html.twig' %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

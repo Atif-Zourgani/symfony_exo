@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for book in books %}
+    <div class="main">
+            <div>
+                <h4>{{ book.title }}</h4>
+            </div>
+            <div>
+                Ce livre contient {{ book.nbpages }}pages. De style {{ book.style }}.
+            </div>
+            <div>
+                {% if book.InStock == true %}
+                    <p>Le livre est disponilble</p>
+                    {% elseif book.InStock == false %}
+                    <p>Le livre est indisponible</p>
+                {% endif %}
+            </div>
+    </div>
+    {% endfor %}
+{% endblock %}
