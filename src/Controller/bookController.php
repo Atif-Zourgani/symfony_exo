@@ -84,15 +84,18 @@ class bookController extends AbstractController
     }
 
     /**
-     * @Route("/books/delete", name="books_delete")
+     * @Route("/books/delete/{id}", name="books_delete_id")
      */
-    public function deleteBook (BookRepository $bookRepository, EntityManagerInterface $entityManager)
+    public function deleteBook (BookRepository $bookRepository, EntityManagerInterface $entityManager, $id)
     {
-        $book = $bookRepository->find();
+        $book = $bookRepository->find($id);
 
+        //remove sert a effacer
         $entityManager->remove($book);
 
         $entityManager->flush();
+
+        return $this->redirectToRoute('books');
     }
 
 

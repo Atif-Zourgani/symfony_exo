@@ -17,7 +17,11 @@
                     {% endif %}
                 </div>
             </a>
+            <form  method="get" action="{{ path('books_delete_id', {id: book.id}) }}">
+                <input id="suppBottom" type="submit" value="Supprimer">
+            </form>
         </div>
+
         {% endfor %}
 {% endblock %}
 

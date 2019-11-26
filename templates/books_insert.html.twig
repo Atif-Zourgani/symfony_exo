@@ -8,13 +8,13 @@
         <div>
                 <form method="get" action="{{ path('books_insert_ok') }}">
                     Titre:<br>
-                    <input type="text" name="title" value="Titre">
+                    <input type="text" name="title" required="required">
                     <br>
                     Genre:<br>
-                    <input type="text" name="style" value="Genre">
+                    <input type="text" name="style" required="required">
                     <br>
                     Nombre de pages<br>
-                    <input type="text" name="NBpages" value="100">
+                    <input type="number" name="NBpages" required="required">
                     <br>
                     Le livre est-il disponible ?<br>
                     <select name="InStock">
