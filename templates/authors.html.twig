@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Auteurs{% endblock %}
+{% block body %}
+    {% for author in authors %}
+
+    <div class="main">
+        <a href="{{ path('author_id', {'id' : author.id}) }}" >
+            <div>
+                <h3>{{ author.name }} {{ author.firstname }}</h3>
+            </div>
+            <div>
+                Cet hauteur est née le {{ author.birhtDate|date("d/m/y") }}.
+                {% if author.DeathDate is not null %}
+                    Il est mort en {{ author.DeathDate|date("d/m/y") }}
+                {% else %}
+                    Il est toujours en vie a ce jour.
+                {% endif %}
+            </div>
+        </a>
+    </div>
+
+    {% endfor %}
+{% endblock %}

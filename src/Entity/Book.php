@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *  * //annotation qui permet de déclarer ma class en tant qu'entité (=tableau)
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
  */
 class Book

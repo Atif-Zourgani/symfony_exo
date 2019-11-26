@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
-{% block title %}Les Auteurs{% endblock %}
+{% block title %}Mettre l'id{% endblock %}
 {% block body %}
-    {% for author in authors %}
-        <div class="main">
-            <div>
-                <h3>{{ author.name }} {{ author.firstname }}</h3>
-            </div>
-            <div>
-                Cet hauteur est née le {{ author.birhtDate|date("d/m/y") }}.
-                {% if author.DeathDate is not null %}
-                    Il est mort en {{ author.DeathDate|date("d/m/y") }}
-                {% else %}
-                    Il est toujours en vie a ce jour.
-                {% endif %}
-            </div>
+
+    <div class="main">
+        <div>
+            <h3>{{ author.name }} {{ author.firstname }}</h3>
         </div>
-    {% endfor %}
+        <div>
+            Cet hauteur est née le {{ author.birhtDate|date("d/m/y") }}.
+            {% if author.DeathDate is not null %}
+                Il est mort en {{ author.DeathDate|date("d/m/y") }}
+            {% else %}
+                Il est toujours en vie a ce jour.
+            {% endif %}
+        </div>
+        <div id="biography">
+            {{ author.biography }}
+        </div>
+    </div>
+
 {% endblock %}

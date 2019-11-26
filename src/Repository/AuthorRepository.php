@@ -19,6 +19,25 @@ class AuthorRepository extends ServiceEntityRepository
         parent::__construct($registry, Author::class);
     }
 
+    //fonction moteur de recherche dans la table sql biography
+    public function getByBiography($word)
+    {
+        // recuperer le query builder ( car c'est le query builder qui  permet de faire la requête SQL )
+        $queryBuilder = $this->createQueryBuilder('bio'); // 'a'= non que je lui donne
+
+        // Construire la requête façon SQL, mais en PHP
+        //traduire la requete en veritable requete SQL
+        $query = $queryBuilder->select('bio')
+            ->where('bio.biography LIKE :word ')
+            ->setParameter('word', '%'.$word.'%')
+            ->getQuery();
+
+        //Executer la requête en base de données pour recuperer les bons livres
+        $biography = $query->getArrayResult();
+
+        return $biography;
+    }
+
     // /**
     //  * @return Author[] Returns an array of Author objects
     //  */

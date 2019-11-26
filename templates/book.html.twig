@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mettre l'id{% endblock %}
+{% block body %}
+
+    <div class="main">
+        <div>
+            <h4>{{ book.title }}</h4>
+        </div>
+        <div>
+            Ce livre contient {{ book.NBpages }} pages. De style {{ book.style }}.
+        </div>
+        <div>
+            {% if book.InStock == true %}
+                <p>Le livre est disponilble</p>
+            {% elseif book.InStock == false %}
+                <p>Le livre est indisponible</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

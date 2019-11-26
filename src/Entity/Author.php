@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * //annotation qui permet de déclarer ma class en tant qu'entité (=tableau)
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
  */
 class Author
@@ -35,6 +36,11 @@ class Author
      * @ORM\Column(type="integer", nullable=true)
      */
     private $DeathDate;
+
+    /**
+     * @ORM\Column(type="text", length=500)
+     */
+    private $biography;
 
     public function getId(): ?int
     {
@@ -85,6 +91,18 @@ class Author
     public function setDeathDate(?int $DeathDate): self
     {
         $this->DeathDate = $DeathDate;
+
+        return $this;
+    }
+
+    public function getBiography (): ?string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography (?string $biography): self
+    {
+        $this->biography = $biography;
 
         return $this;
     }
