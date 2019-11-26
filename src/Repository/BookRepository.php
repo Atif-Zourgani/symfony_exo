@@ -19,7 +19,7 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function getByGenre()
+    public function getByGenre($style)
     {
         // recuperer le query builder ( car c'est le query builder qui  permet de faire la requête SQL )
         $queryBuilder = $this->createQueryBuilder('b'); // 'b'= non que je lui donne
@@ -27,8 +27,8 @@ class BookRepository extends ServiceEntityRepository
         // Construire la requête façon SQL, mais en PHP
         //traduire la requete en veritable requete SQL
         $query = $queryBuilder->select('b')
-            ->where('b.style = :style')
-            ->setParameter('style', 'education')
+            ->where('b.style LIKE :style')
+            ->setParameter('style', '%' . $style . '%')
             ->getQuery();
 
         //Executer la requête en base de données pour recuperer les bons livres

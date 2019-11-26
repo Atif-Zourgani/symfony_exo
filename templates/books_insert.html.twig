@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<main>
+    <div>
+        <div>
+            <h3>Entrez votre nouveau livre</h3>
+        </div>
+        <div>
+                <form method="get" action="{{ path('books_insert_ok') }}">
+                    Titre:<br>
+                    <input type="text" name="title" value="Titre">
+                    <br>
+                    Genre:<br>
+                    <input type="text" name="style" value="Genre">
+                    <br>
+                    Nombre de pages<br>
+                    <input type="text" name="NBpages" value="100">
+                    <br>
+                    Le livre est-il disponible ?<br>
+                    <select name="InStock">
+                        <option value="true" >dispo</option>
+                        <option value="false" >indispo</option>
+                    </select>
+                    <br><br>
+                    <input type="submit" value="Envoyez">
+                </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -3,8 +3,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class bookController extends AbstractController
@@ -33,17 +37,63 @@ class bookController extends AbstractController
 
     /**
      * @Route("/books_by_genre", name="books_by_genre")
+     * @param BookRepository $bookRepository
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getBooksByGenre(BookRepository $bookRepository)
+    public function getBooksByGenre(BookRepository $bookRepository, Request $request)
     {
-        //commencer par appeler le bookrepository (en le passent dans les parenthese en parametre de la methode)
-        $books = $bookRepository->getByGenre();
-        dump($books);
+        $style = $request->query->get('style');
+
+        $books = $bookRepository->getByGenre($style);
 
         return $this->render('books.html.twig', ['books' => $books]);
-        //ensuite on appelle la methode qu'on as créée dans le bookrepository ( "getbygenre()")
-        //cette methode est sencé nous retourner tous les livres en fonction d'un genre
-        // elle va donc executer une requete SELECT en base de données
+
     }
+
+    /**
+     * @Route("/books/insert", name="books_insert")
+     */
+    public function insertBook ()
+    {
+        return $this->render('books_insert.html.twig');
+    }
+
+    /**
+     * @Route("/books/insert_ok", name="books_insert_ok")
+     */
+    public function insertBookOk(EntityManagerInterface $entityManager, Request $request)
+    {
+        $title = $request->query->get('title');
+        $style = $request->query->get('style');
+        $inStock = $request->query->get('InStock');
+        $NBpages = $request->query->get('NBpages');
+
+        // inserer dans la table book un nouveau bouquin
+        $book = new Book();
+
+        $book->setTitle($title);
+        $book->setStyle($style);
+        $book->setInstock($inStock);
+        $book->setNBpages($NBpages);
+
+        $entityManager->persist ($book);
+        $entityManager->flush();
+
+        return $this->render('books_insert_ok.html.twig');
+    }
+
+    /**
+     * @Route("/books/delete", name="books_delete")
+     */
+    public function deleteBook (BookRepository $bookRepository, EntityManagerInterface $entityManager)
+    {
+        $book = $bookRepository->find();
+
+        $entityManager->remove($book);
+
+        $entityManager->flush();
+    }
+
 
 }

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Repository\AuthorRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -44,4 +45,22 @@ class authorController extends AbstractController
 
         return $this->render('author.html.twig', ['biography' => $biography]);
     }
+
+    /**
+     * @Route("/authors/insert", name="authors_insert")
+     */
+    public function insertAuthors ()
+    {
+        return $this->render('authors_insert.html.twig');
+    }
+
+    /**
+     * @Route("/authors/insert_ok", name="authors_insert_ok")
+     */
+    public function insertAuthorsOk (/**EntityManagerInterface $entityManager, Request $request**/)
+    {
+
+        /** ( new \DateTime('NOW')) **/
+    }
+
 }

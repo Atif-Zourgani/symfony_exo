@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {% for book in books %}
-    <div class="main">
-        <a href="{{ path('book_id', {'id' : book.id}) }}" >
-            <div>
-                <h4>{{ book.title }}</h4>
-            </div>
-            <div>
-                Ce livre contient {{ book.NBpages }} pages. De style {{ book.style }}.
-            </div>
-            <div>
-                {% if book.InStock == true %}
-                    <p>Le livre est disponilble</p>
-                    {% elseif book.InStock == false %}
-                    <p>Le livre est indisponible</p>
-                {% endif %}
-            </div>
-        </a>
-    </div>
-    {% endfor %}
+        {% for book in books %}
+        <div class="main">
+            <a href="{{ path('book_id', {'id' : book.id}) }}" >
+                <div>
+                    <h4>{{ book.title }}</h4>
+                </div>
+                <div>
+                    Ce livre contient {{ book.NBpages }} pages. De style {{ book.style }}.
+                </div>
+                <div>
+                    {% if book.InStock == true %}
+                        <p>Le livre est disponilble</p>
+                        {% elseif book.InStock == false %}
+                        <p>Le livre est indisponible</p>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        {% endfor %}
 {% endblock %}
+
