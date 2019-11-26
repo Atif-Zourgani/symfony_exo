@@ -28,12 +28,12 @@ class Author
     private $firstname;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $birhtDate;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $DeathDate;
 
@@ -71,24 +71,24 @@ class Author
         return $this;
     }
 
-    public function getBirhtDate(): ?int
+    public function getBirhtDate(): ?\DateTime
     {
         return $this->birhtDate;
     }
 
-    public function setBirhtDate(?int $birhtDate): self
+    public function setBirhtDate(?\DateTime $birhtDate): self
     {
         $this->birhtDate = $birhtDate;
 
         return $this;
     }
 
-    public function getDeathDate(): ?int
+    public function getDeathDate(): ?\DateTime
     {
         return $this->DeathDate;
     }
 
-    public function setDeathDate(?int $DeathDate): self
+    public function setDeathDate(?\DateTime $DeathDate): self
     {
         $this->DeathDate = $DeathDate;
 

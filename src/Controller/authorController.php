@@ -3,9 +3,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+//use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -57,10 +60,45 @@ class authorController extends AbstractController
     /**
      * @Route("/authors/insert_ok", name="authors_insert_ok")
      */
-    public function insertAuthorsOk (/**EntityManagerInterface $entityManager, Request $request**/)
+    public function insertAuthorsOk (EntityManagerInterface $entityManager, Request $request)
     {
+        $name = $request->query->get('name');
+        $firstname = $request->query->get('firstname');
+        $birhtDate = $request->query->get('birhtDate');
+        $DeathDate = $request->query->get('DeathDate');
+        $biography = $request->query->get('biography');
+
+        // inserer dans la table book un nouveau bouquin
+        $author = new Author();
+
+        $author->setName($name);
+        $author->setFirstname($firstname);
+        $author->setBirhtDate( new \DateTime($birhtDate));
+        $author->setDeathDate( new \DateTime($DeathDate));
+        $author->setBiography($biography);
+
+        $entityManager->persist ($author);
+        $entityManager->flush();
+
+        return $this->render('authors_insert_ok.html.twig');
 
         /** ( new \DateTime('NOW')) **/
     }
+
+    /**
+     * @Route("/authors/delete/{id}", name="authors_delete_id")
+     */
+    public function deleteAuthors (authorRepository $authorRepository, EntityManagerInterface $entityManager, $id)
+    {
+        $author = $authorRepository->find($id);
+
+        //remove sert a effacer
+        $entityManager->remove($author);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('authors');
+    }
+
 
 }
