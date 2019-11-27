@@ -124,7 +124,7 @@ class bookController extends AbstractController
     /**
      * @Route("/books/insert_form", name="books_insert_form")
      */
-    public function insertBookForm ()
+    public function insertBookForm (Request $request, EntityManagerInterface $entityManager)
     {
         //Je crée un nouveaubook
         //J'utilise la gabarit de formulaire pour créer mon formulaire
@@ -137,6 +137,22 @@ class bookController extends AbstractController
         //J'utilise la methode createform pour créer le gabarit de formulaire pour le book: Booktype ( que j'ai generer ne ligne de commande
         //) et je lui associe mon entité book vide.
         $bookForm = $this->createForm(BookType::class, $book);
+
+        //si je suis sur une methode post donc qu'un formulaire a été envoyé
+        if ($request->isMethod('post')) {
+
+            //je récupere les données de la method (post) et je les associes a mon formulaire
+            $bookForm->handleRequest($request);
+
+            //Si les données de mon formulaires sont valide ( que les types dans les input sont bon, que tout les champs obligatoire sont remplis etc)
+            if($bookForm->isValid()) {
+
+                //j'enregistre en BDD ma variable $book qui n'est plus vide car elle as été remplie avec les données du formulaire
+                $entityManager->persist($book);
+                $entityManager->flush();
+            }
+        }
+
         $bookformView = $bookForm->createView();
 
         return $this->render('book_insert_form.html.twig' ,[
