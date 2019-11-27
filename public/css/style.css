@@ -45,8 +45,16 @@ main{
     font-size: 12px;
     border-radius: 4px ;
     border: 2px solid #565656;
+    margin: 10px;
 }
 footer{
     text-align: center;
     background-color: #AA3333;
+}
+#modifBottom{
+    background-color: wheat;
+    font-size: 12px;
+    border-radius: 4px ;
+    border: 2px solid #565656;
+    margin: 10px;
 }

@@ -7,11 +7,11 @@
             <h3>{{ author.name }} {{ author.firstname }}</h3>
         </div>
         <div>
-            Cet hauteur est née le {{ author.birhtDate|date("d/m/y") }}.
+            Cet hauteur est née le {{ author.birhtDate|date("d/m/Y") }}.
             {% if author.DeathDate is not null %}
-                Il est mort en {{ author.DeathDate|date("d/m/y") }}
+                Il est mort le {{ author.DeathDate|date("d/m/Y") }}
             {% else %}
-                Il est toujours en vie a ce jour.
+                Il est toujours en vie à ce jour.
             {% endif %}
         </div>
         <div id="biography">

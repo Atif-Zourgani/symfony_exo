@@ -7,19 +7,24 @@
                     <h4>{{ book.title }}</h4>
                 </div>
                 <div>
-                    Ce livre contient {{ book.NBpages }} pages. De style {{ book.style }}.
+                    Ce livre contient {{ book.NBpages }} page(s). De style {{ book.style }}.
                 </div>
                 <div>
                     {% if book.InStock == true %}
-                        <p>Le livre est disponilble</p>
+                        <p>Le livre est disponible</p>
                         {% elseif book.InStock == false %}
                         <p>Le livre est indisponible</p>
                     {% endif %}
                 </div>
             </a>
-            <form  method="get" action="{{ path('books_delete_id', {id: book.id}) }}">
-                <input id="suppBottom" type="submit" value="Supprimer">
-            </form>
+            <div class="displayFlexEnd">
+                <form  method="get" action="{{ path('books_delete_id', {'id': book.id}) }}">
+                    <input id="suppBottom" type="submit" value="Supprimer">
+                </form>
+                <form  method="get" action="{{ path('books_update_id', {'id': book.id}) }}">
+                    <input id="modifBottom" type="submit" value="Modifier">
+                </form>
+            </div>
         </div>
 
         {% endfor %}

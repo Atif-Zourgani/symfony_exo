@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookType;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -87,15 +88,59 @@ class bookController extends AbstractController
      * @Route("/books/delete/{id}", name="books_delete_id")
      */
     public function deleteBook (BookRepository $bookRepository, EntityManagerInterface $entityManager, $id)
-    {
+    {//but supprimer un livre dans SQL
+
         $book = $bookRepository->find($id);
 
-        //remove sert a effacer
+        // remove = efface
         $entityManager->remove($book);
 
         $entityManager->flush();
 
+        //redirectToRoute= redirige vers la page de pages pour que l'on vois directemeent la suppression et qu'on puissent continuer a bosser
         return $this->redirectToRoute('books');
+    }
+
+    /**
+     * @Route("/books/Update/{id}", name="books_update_id")
+     */
+    public  function  updateBook (bookRepository $bookRepository, EntityManagerInterface $entityManager, $id)
+    {// but = recuperer book / modifier book / savegarder book.
+
+        // J'utilise le Repository de book pour recuperer un livre en fonction de son id
+        $book = $bookRepository->find($id);
+
+        // modifie le titre du livre
+        $book->setTitle('test réussis');
+
+        // persist = Zone de stockage temporaire (unité de travail)
+        $entityManager->persist($book);
+        //flush -> Enregistre dans la base de données les modif
+        $entityManager->flush();
+
+        return $this->redirectToRoute('books');
+    }
+
+    /**
+     * @Route("/books/insert_form", name="books_insert_form")
+     */
+    public function insertBookForm ()
+    {
+        //Je crée un nouveaubook
+        //J'utilise la gabarit de formulaire pour créer mon formulaire
+        //J'envoie mon formulaire a un fichier twig
+        //et je l'affiche
+
+        //je crée un nouveau book/ en creant une nouvelle instance de l'entité book
+        $book =  new book();
+
+        //J'utilise la methode createform pour créer le gabarit de formulaire pour le book: Booktype ( que j'ai generer ne ligne de commande
+        //) et je lui associe mon entité book vide.
+        $bookForm = $this->createForm(BookType::class, $book);
+        $bookformView = $bookForm->createView();
+
+        return $this->render('book_insert_form.html.twig' ,[
+            'bookFormView' => $bookformView]);
     }
 
 

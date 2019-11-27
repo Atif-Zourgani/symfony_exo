@@ -7,11 +7,11 @@
             <h4>{{ book.title }}</h4>
         </div>
         <div>
-            Ce livre contient {{ book.NBpages }} pages. De style {{ book.style }}.
+            Ce livre contient {{ book.NBpages }} page(s). De style {{ book.style }}.
         </div>
         <div>
             {% if book.InStock == true %}
-                <p>Le livre est disponilble</p>
+                <p>Le livre est disponible</p>
             {% elseif book.InStock == false %}
                 <p>Le livre est indisponible</p>
             {% endif %}
