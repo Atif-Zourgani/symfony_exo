@@ -7,7 +7,7 @@
             </div>
                 <div>{# Formulaire d'ajout d'un nouvel auteur
                       methode get= envoi de données avec url / action = ou l'envoyer#}
-                    <form method="get" action="{{ path('authors_insert_ok') }}" >
+                    <form method="get" action="{{ path('admin_authors_insert_ok') }}" >
                         Nom<br>
                         {#//type = quel genre de champ ( date / text ?) /name = denomination de colonne SQL visé / Value= Quoi y indiquer/ required=obligation de remplir ce champ#}
                         <input type="text" name="name" value="Nom" required="required">

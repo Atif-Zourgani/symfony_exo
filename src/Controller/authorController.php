@@ -14,8 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class authorController extends AbstractController
 {
+    //annotation qui donne la route de ma fonction a mon twig ( crée une page web )
     /**
-     * //annotation qui donne la route de ma fonction a mon twig ( crée une page web )
      * @Route("/authors", name="authors")
      */
     public function allAuthors(AuthorRepository $authorRepository)
@@ -29,7 +29,7 @@ class authorController extends AbstractController
     /**
      * @Route("/author/{id}", name="author_id")
      */
-    public function getAuthor(AuthorRepository $authorRepository, $id)
+    public function unuthor(AuthorRepository $authorRepository, $id)
     {
 
         $author = $authorRepository->find($id);
@@ -50,15 +50,15 @@ class authorController extends AbstractController
     }
 
     /**
-     * @Route("/authors/insert", name="authors_insert")
+     * @Route("/admin/authors/insert", name="admin_authors_insert")
      */
     public function insertAuthors ()
     {
-        return $this->render('authors_insert.html.twig');
+        return $this->render('admin_authors_insert.html.twig');
     }
 
     /**
-     * @Route("/authors/insert_ok", name="authors_insert_ok")
+     * @Route("/admin/authors/insert_ok", name="admin_authors_insert_ok")
      */
     public function insertAuthorsOk (EntityManagerInterface $entityManager, Request $request)
     {
@@ -80,13 +80,13 @@ class authorController extends AbstractController
         $entityManager->persist ($author);
         $entityManager->flush();
 
-        return $this->render('authors_insert_ok.html.twig');
+        return $this->render('admin_authors_insert_ok.html.twig');
 
         /** ( new \DateTime('NOW')) **/
     }
 
     /**
-     * @Route("/authors/delete/{id}", name="authors_delete_id")
+     * @Route("/admin/authors/delete/{id}", name="admin_authors_delete_id")
      */
     public function deleteAuthors (authorRepository $authorRepository, EntityManagerInterface $entityManager, $id)
     {

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Auteurs{% endblock %}
+{% block body %}
+
+{#je crée le html de mon formulaire (balise form, input etc) en utilisant la form() avec en
+parametre ma variable de formulaire
+{{ form (bookFormView)}}#}
+
+    {#pour faire un form php qu'on peu stylisé #}
+{% block content %}
+
+    {{ form_start(bookFormView, { 'attr': {'class': 'form_style'} } ) }}
+
+    {# j'utilise le parametre 'attr' pour pouvoir attribuer une classe css
+     à mon input #}
+
+    <div class="form_style_ligne">
+    {{ form_errors(bookFormView.title) }}
+    {{ form_label(bookFormView.title) }}
+    {{ form_widget(bookFormView.title, { 'attr': {'class': 'form_style_ligre'} }) }}
+    </div>
+    <div class="form_style_ligne">
+    {{ form_errors(bookFormView.style)}}
+    {{ form_label(bookFormView.style) }}
+    {{ form_widget(bookFormView.style) }}
+    </div>
+    <div class="form_style_ligne">
+    {{ form_errors(bookFormView.authors) }}
+    {{ form_label(bookFormView.authors) }}
+    {{ form_widget(bookFormView.authors) }}
+    </div>
+    <div class="form_style_ligne">
+    {{ form_errors(bookFormView.NBpages) }}
+    {{ form_label(bookFormView.NBpages) }}
+    {{ form_widget(bookFormView.NBpages) }}
+    </div>
+    <div class="form_style_ligne">
+    {{ form_errors(bookFormView.InStock) }}
+    {{ form_label(bookFormView.InStock) }}
+    {{ form_widget(bookFormView.InStock) }}
+    </div>
+    <div class="form_style_ligne">
+    {{ form_label(bookFormView.Envoyer) }}
+    {{ form_widget(bookFormView.Envoyer) }}
+    </div>
+    {{ form_end(bookFormView) }}
+
+{% endblock %}
+
+{% endblock %}

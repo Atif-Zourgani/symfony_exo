@@ -16,6 +16,13 @@
                 <p>Le livre est indisponible</p>
             {% endif %}
         </div>
+        <div>
+            {% if book.authors is null %}
+                <p> L'auteur n'est pas précisé.</p>
+            {% else %}
+                Ecrit par {{ book.authors.name }} {{ book.authors.firstname }}.
+            {% endif %}
+        </div>
     </div>
 
 {% endblock %}

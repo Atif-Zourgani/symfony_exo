@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * //annotation qui permet de déclarer ma class en tant qu'entité (=tableau)
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
+ * @ORM\Table(name="author")
  */
 class Author
 {
@@ -41,6 +44,27 @@ class Author
      * @ORM\Column(type="text", length=500)
      */
     private $biography;
+
+    // creation de relation de table dans BDD
+    //many yo one = cardinalité de 1 a 0
+    //quand on fait un onetomany il faut faire un mappedby pour lier les deux tables
+    //ensuite generer getteur et setteur et faire une doctrine migration
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="authors")
+     */
+    private $book;
+
+    //cette construct sert a construire un array pour stocker tout les book ( pour eviter quils s'écrasent les uns les autres )
+    public function __construct()
+    {
+        $this->book = new ArrayCollection();
+    }
+
+
+    public function getBook()
+    {
+        return $this->book;
+    }
 
     public function getId(): ?int
     {

@@ -10,7 +10,11 @@
                 <h3>{{ author.name }} {{ author.firstname }}</h3>
             </div>
             <div>
+                {% for book in author.book %}
+                    {{ book.title }}
+                {% endfor %}
                 Cet hauteur est née le {{ author.birhtDate|date("d/m/Y") }}.
+                <br>
                 {% if author.DeathDate is not null %}
                     Il est mort le {{ author.DeathDate|date("d/m/Y") }}
                 {% else %}
@@ -18,7 +22,7 @@
                 {% endif %}
             </div>
         </a>
-        <form  method="get" action="{{ path('authors_delete_id', {id: author.id}) }}">
+        <form  method="get" action="{{ path('admin_authors_delete_id', {id: author.id}) }}">
             <input id="suppBottom" type="submit" value="Supprimer">
         </form>
     </div>

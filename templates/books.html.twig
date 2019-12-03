@@ -10,6 +10,13 @@
                     Ce livre contient {{ book.NBpages }} page(s). De style {{ book.style }}.
                 </div>
                 <div>
+                    {% if book.authors is null %}
+                    <p> L'auteur n'est pas précisé.</p>
+                    {% else %}
+                    Ecrit par {{ book.authors.name }} {{ book.authors.firstname }}.
+                        {% endif %}
+                </div>
+                <div>
                     {% if book.InStock == true %}
                         <p>Le livre est disponible</p>
                         {% elseif book.InStock == false %}
@@ -18,11 +25,11 @@
                 </div>
             </a>
             <div class="displayFlexEnd">
-                <form  method="get" action="{{ path('books_delete_id', {'id': book.id}) }}">
+                <form  method="get" action="{{ path('admin_books_delete_id', {'id': book.id}) }}">
                     <input id="suppBottom" type="submit" value="Supprimer">
                 </form>
-                <form  method="get" action="{{ path('books_update_id', {'id': book.id}) }}">
-                    <input id="modifBottom" type="submit" value="Modifier">
+                <form  method="post" action="{{ path('admin_books_update_form_id', {'id': book.id}) }}">
+                    <input id="modifBottom" type="submit" value="Modifier2">
                 </form>
             </div>
         </div>

@@ -53,15 +53,15 @@ class bookController extends AbstractController
     }
 
     /**
-     * @Route("/books/insert", name="books_insert")
+     * @Route("/admin/books/insert", name="admin_books_insert")
      */
-    public function insertBook ()
+    public function insertBook()
     {
-        return $this->render('books_insert.html.twig');
+        return $this->render('admin_books_insert.html.twig');
     }
 
     /**
-     * @Route("/books/insert_ok", name="books_insert_ok")
+     * @Route("/admin/books/insert_ok", name="admin_books_insert_ok")
      */
     public function insertBookOk(EntityManagerInterface $entityManager, Request $request)
     {
@@ -78,16 +78,16 @@ class bookController extends AbstractController
         $book->setInstock($inStock);
         $book->setNBpages($NBpages);
 
-        $entityManager->persist ($book);
+        $entityManager->persist($book);
         $entityManager->flush();
 
-        return $this->render('books_insert_ok.html.twig');
+        return $this->render('admin_books_insert_ok.html.twig');
     }
 
     /**
-     * @Route("/books/delete/{id}", name="books_delete_id")
+     * @Route("/admin/books/delete/{id}", name="admin_books_delete_id")
      */
-    public function deleteBook (BookRepository $bookRepository, EntityManagerInterface $entityManager, $id)
+    public function deleteBook(BookRepository $bookRepository, EntityManagerInterface $entityManager, $id)
     {//but supprimer un livre dans SQL
 
         $book = $bookRepository->find($id);
@@ -102,9 +102,9 @@ class bookController extends AbstractController
     }
 
     /**
-     * @Route("/books/Update/{id}", name="books_update_id")
+     * @Route("/admin/books/Update/{id}", name="admin_books_update_id")
      */
-    public  function  updateBook (bookRepository $bookRepository, EntityManagerInterface $entityManager, $id)
+    public function updateBook(bookRepository $bookRepository, EntityManagerInterface $entityManager, $id)
     {// but = recuperer book / modifier book / savegarder book.
 
         // J'utilise le Repository de book pour recuperer un livre en fonction de son id
@@ -122,9 +122,9 @@ class bookController extends AbstractController
     }
 
     /**
-     * @Route("/books/insert_form", name="books_insert_form")
+     * @Route("/admin/books/insert_form", name="admin_books_insert_form")
      */
-    public function insertBookForm (Request $request, EntityManagerInterface $entityManager)
+    public function insertBookForm(Request $request, EntityManagerInterface $entityManager)
     {
         //Je crée un nouveaubook
         //J'utilise la gabarit de formulaire pour créer mon formulaire
@@ -132,7 +132,7 @@ class bookController extends AbstractController
         //et je l'affiche
 
         //je crée un nouveau book/ en creant une nouvelle instance de l'entité book
-        $book =  new book();
+        $book = new book();
 
         //J'utilise la methode createform pour créer le gabarit de formulaire pour le book: Booktype ( que j'ai generer ne ligne de commande
         //) et je lui associe mon entité book vide.
@@ -145,19 +145,61 @@ class bookController extends AbstractController
             $bookForm->handleRequest($request);
 
             //Si les données de mon formulaires sont valide ( que les types dans les input sont bon, que tout les champs obligatoire sont remplis etc)
-            if($bookForm->isValid()) {
+            if ($bookForm->isValid()) {
 
                 //j'enregistre en BDD ma variable $book qui n'est plus vide car elle as été remplie avec les données du formulaire
                 $entityManager->persist($book);
                 $entityManager->flush();
+                return $this->redirectToRoute('books');
             }
         }
 
         $bookformView = $bookForm->createView();
 
-        return $this->render('book_insert_form.html.twig' ,[
+        return $this->render('admin_book_insert_form.html.twig', [
             'bookFormView' => $bookformView]);
     }
 
+
+    /**
+     * @Route("/admin/books/update_form/{id}", name="admin_books_update_form_id")
+     *///----------MODIFIER DANS LA BASE DE DONNEE
+    public function updateBookForm(BookRepository $bookRepository, Request $request, EntityManagerInterface $entityManager, $id)
+    {
+        //recuperer l'enregistrement / l'entité en BDD
+        //créer le gabarit formulaire
+        //on recupere les données envoyés par le formulaire
+        //On re-enregistre l'entité dans la bdd
+
+        //recupere les données
+        $book = $bookRepository->find($id);
+
+        $bookForm = $this->createForm(BookType::class, $book);
+
+        //= Si une methode post est passé
+        if ($request->isMethod('post')) {
+            //handlerequest = traite la requete
+            $bookForm->handleRequest($request);
+
+            //isSubmitted = si un form est envoyé / isValid = si il est valide
+            if ($bookForm ->isSubmitted() && $bookForm->isValid()) {
+                //persist=stocké
+                $entityManager->persist($book);
+                //flush=envoyé en BDD
+                $entityManager->flush();
+                return $this->redirectToRoute('books');
+            }
+        }
+
+
+        // à partir de mon gabarit, je crée la vue de mon formulaire
+        $bookFormView = $bookForm->createView();
+
+        // je retourne un fichier twig, et je lui envoie ma variable qui contient
+        // mon formulaire
+        return $this->render('admin_book_insert_form.html.twig', [
+            'bookFormView' => $bookFormView
+        ]);
+    }
 
 }
