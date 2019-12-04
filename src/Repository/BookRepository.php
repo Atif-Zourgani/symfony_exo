@@ -19,16 +19,36 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function getByGenre($style)
+    public function getBookByStyleOrByTitle($style,$title)
     {
         // recuperer le query builder ( car c'est le query builder qui  permet de faire la requête SQL )
-        $queryBuilder = $this->createQueryBuilder('b'); // 'b'= non que je lui donne
+        $queryBuilder = $this->createQueryBuilder('book'); // 'b'= non que je lui donne
 
         // Construire la requête façon SQL, mais en PHP
         //traduire la requete en veritable requete SQL
-        $query = $queryBuilder->select('b')
-            ->where('b.style LIKE :style')
+        $query = $queryBuilder->select('book')
+            ->where('book.style LIKE :style')
             ->setParameter('style', '%' . $style . '%')
+            ->andWhere('book.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
+            ->getQuery();
+
+        //Executer la requête en base de données pour recuperer les bons livres
+        $books = $query->getArrayResult();// demande de resultats en array mais d'autre possibilité son disponible
+
+        return $books;
+    }
+
+    public function getByTitle($title)
+    {
+        // recuperer le query builder ( car c'est le query builder qui  permet de faire la requête SQL )
+        $queryBuilder = $this->createQueryBuilder('book'); // 'b'= non que je lui donne
+
+        // Construire la requête façon SQL, mais en PHP
+        //traduire la requete en veritable requete SQL
+        $query = $queryBuilder->select('book')
+            ->where('book.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
             ->getQuery();
 
         //Executer la requête en base de données pour recuperer les bons livres

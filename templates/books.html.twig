@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="mainrequete">
+        <form action="{{ path('get_book_by_style_or_by_title') }}" method="get">
+            <input type="text" name="style" placeholder="style">
+            <input type="text" name="title" placeholder="titre">
+            <input type="submit" value="rechercher">
+        </form>
         {% for book in books %}
         <div class="listing">
             <a href="{{ path('book_id', {'id' : book.id}) }}" >
@@ -11,11 +16,12 @@
                     Ce livre contient {{ book.NBpages }} page(s). De style {{ book.style }}.
                 </div>
                 <div>
-                    {% if book.authors is null %}
-                    <p> L'auteur n'est pas précisé.</p>
+                    {% if book.authors is defined %}
+                        Ecrit par {{ book.authors.name }} {{ book.authors.firstname }}.
                     {% else %}
-                    Ecrit par {{ book.authors.name }} {{ book.authors.firstname }}.
-                        {% endif %}
+                        <p> L'auteur n'est pas précisé.</p>
+
+                    {% endif %}
                 </div>
                 <div>
                     {% if book.InStock == true %}

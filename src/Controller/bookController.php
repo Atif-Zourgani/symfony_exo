@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class bookController extends AbstractController
@@ -40,7 +41,7 @@ class bookController extends AbstractController
      * @Route("/books_by_genre", name="books_by_genre")
      * @param BookRepository $bookRepository
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function getBooksByGenre(BookRepository $bookRepository, Request $request)
     {
@@ -52,6 +53,22 @@ class bookController extends AbstractController
 
     }
 
+    /**
+     * @Route("/books_get_by", name="get_book_by_style_or_by_title")
+     * @param BookRepository $bookRepository
+     * @param Request $request
+     * @return Response
+     */
+    public function getBookByStyleOrByTitle(BookRepository $bookRepository, Request $request)
+    {
+        $title = $request->query->get('title');
+        $style = $request->query->get('style');
+
+
+        $books = $bookRepository->getBookByStyleOrByTitle($style, $title);
+
+        return $this->render('books.html.twig', ['books' => $books]);
+    }
 
     /**
      * @Route("/admin/books/insert", name="admin_books_insert")
@@ -183,7 +200,7 @@ class bookController extends AbstractController
             $bookForm->handleRequest($request);
 
             //isSubmitted = si un form est envoyé / isValid = si il est valide
-            if ($bookForm ->isSubmitted() && $bookForm->isValid()) {
+            if ($bookForm->isSubmitted() && $bookForm->isValid()) {
                 //persist=stocké
                 $entityManager->persist($book);
                 //flush=envoyé en BDD
