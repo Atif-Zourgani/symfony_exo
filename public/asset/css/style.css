@@ -7,7 +7,11 @@ body{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    background-color: #565656;
+}
+.title{
+    width: 20%;
+    margin: auto;
+    background-color: rgb(200,200,200);
 }
 .displayFlexEnd{
     display: flex;
@@ -17,9 +21,17 @@ body{
     display: flex;
     justify-content: flex-start;
 }
+.displayFlexCenter{
+    display: flex;
+    justify-content: center;
+}
 .displayBet{
     display: flex;
     justify-content: space-between;
+}
+.displayAro{
+    display: flex;
+    justify-content: space-around;
 }
 a{
     text-decoration: none;
@@ -28,19 +40,37 @@ a{
 }
 header{
     text-align: center;
-    background-color: #AA3333;
 }
-main{
+.sticky{
+    position: sticky;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+.accueilArticle{
+    padding: 30px;
+}
+#presentation{
+    width: 80%;
+    background-color: #565656;
+    margin: 100px auto ;
+    text-align: center;
+    padding: 30px 30px 50px 30px;
+}
+.mainrequete{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    background-color: rgb(250,250,250);
 }
-.main{
+
+.listing{
     text-align: center;
     margin: 50px ;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgb(240,240,240);
     width: 30%;
-
+    box-shadow: 6px 6px 2px 1px rgba(150, 150, 150, 150);
 }
 #biography{
     text-align: center;
@@ -54,7 +84,6 @@ main{
 }
 footer{
     text-align: center;
-    background-color: #AA3333;
 }
 #modifBottom{
     background-color: wheat;

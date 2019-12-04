@@ -1,10 +1,8 @@
 <header>
 
     <div class="displayBet">
-        <div class="displayFlexStart">
-            <a href="{{ path('accueil') }}">Accueil</a>
-        </div>
         <div class="displayFlexEnd">
+            <a href="{{ path('fos_user_profile_show') }}" >Mon profil</a>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
                 <a href="{{ path('fos_user_security_logout') }}">
@@ -14,19 +12,16 @@
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
             {% endif %}
         </div>
-    </div>
-
-    <h1>Ma BibliO</h1>
-
-    <div class="displayBet">
-        <div class="displayFlexStart">
-            <h2> <a href="{{ path('authors')}}">Les auteurs</a> </h2>
-            <h2> <a href="{{ path('books')}}">Les livres</a> </h2>
-        </div>
         <div class="displayFlexEnd">
-            <h2> <a href="{{ path('admin_authors_insert')}}">Ajouter un auteur</a> </h2>
-            <h2> <a href="{{ path('admin_books_insert')}}">Ajouter un livre</a> </h2>
+             <a href="{{ path('admin_authors_insert')}}">Ajouter un auteur</a>
+             <a href="{{ path('admin_books_insert')}}">Ajouter un livre</a>
         </div>
+
+
     </div>
+    <div class="title">
+        <h1 class="biblio">Ma BibliO</h1>
+    </div>
+
 
 </header>

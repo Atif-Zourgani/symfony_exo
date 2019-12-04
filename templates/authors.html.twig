@@ -1,31 +1,33 @@
 {% extends 'base.html.twig' %}
 {% block title %}Les Auteurs{% endblock %}
 {% block body %}
-    {% for author in authors %}
+    <div class="mainrequete">
+        {% for author in authors %}
 
-    <div class="main">
+        <div class="listing">
 
-        <a href="{{ path('author_id', {'id' : author.id}) }}" >
-            <div>
-                <h3>{{ author.name }} {{ author.firstname }}</h3>
-            </div>
-            <div>
-                {% for book in author.book %}
-                    {{ book.title }}
-                {% endfor %}
-                Cet hauteur est née le {{ author.birhtDate|date("d/m/Y") }}.
-                <br>
-                {% if author.DeathDate is not null %}
-                    Il est mort le {{ author.DeathDate|date("d/m/Y") }}
-                {% else %}
-                    Il est toujours en vie à ce jour.
-                {% endif %}
-            </div>
-        </a>
-        <form  method="get" action="{{ path('admin_authors_delete_id', {id: author.id}) }}">
-            <input id="suppBottom" type="submit" value="Supprimer">
-        </form>
+            <a href="{{ path('author_id', {'id' : author.id}) }}" >
+                <div>
+                    <h3>{{ author.name }} {{ author.firstname }}</h3>
+                </div>
+                <div>
+                    {% for book in author.book %}
+                        {{ book.title }}
+                    {% endfor %}
+                    Cet hauteur est née le {{ author.birhtDate|date("d/m/Y") }}.
+                    <br>
+                    {% if author.DeathDate is not null %}
+                        Il est mort le {{ author.DeathDate|date("d/m/Y") }}
+                    {% else %}
+                        Il est toujours en vie à ce jour.
+                    {% endif %}
+                </div>
+            </a>
+            <form  method="get" action="{{ path('admin_authors_delete_id', {id: author.id}) }}">
+                <input id="suppBottom" type="submit" value="Supprimer">
+            </form>
+        </div>
+
+        {% endfor %}
     </div>
-
-    {% endfor %}
 {% endblock %}

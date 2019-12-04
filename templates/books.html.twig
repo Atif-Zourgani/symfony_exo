@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="mainrequete">
         {% for book in books %}
-        <div class="main">
+        <div class="listing">
             <a href="{{ path('book_id', {'id' : book.id}) }}" >
                 <div>
                     <h4>{{ book.title }}</h4>
@@ -35,5 +36,6 @@
         </div>
 
         {% endfor %}
+    </div>
 {% endblock %}
 

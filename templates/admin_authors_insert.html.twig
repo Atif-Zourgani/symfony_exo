@@ -1,34 +1,34 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <main>
-        <div>
-            <div>
-                <h3>Entrez le nouvel auteur</h3>
-            </div>
-                <div>{# Formulaire d'ajout d'un nouvel auteur
-                      methode get= envoi de données avec url / action = ou l'envoyer#}
-                    <form method="get" action="{{ path('admin_authors_insert_ok') }}" >
-                        Nom<br>
-                        {#//type = quel genre de champ ( date / text ?) /name = denomination de colonne SQL visé / Value= Quoi y indiquer/ required=obligation de remplir ce champ#}
-                        <input type="text" name="name" value="Nom" required="required">
-                        <br>
-                        Prénom<br>
-                        {#type = quel genre de champ ( date / text ?) /name = denomination de colonne SQL visé / Value= Quoi y indiquer/ required=obligation de remplir ce champ#}
-                        <input type="text" name="firstname" value="Prénom" required="required">
-                        <br>
-                        Naissance<br>
-                        {#type = quel genre de champ ( date / text ?) /name = denomination de colonne SQL visé / Value= Quoi y indiquer/ required=obligation de remplir ce champ#}
-                        <input type="date" name="BirhtDate" required="required">
-                        <br>
-                        Mort<br>
-                        <input type="date" name="DeathDate"><br>
-                        Biographie<br>
-                        <textarea type="text" name="biography"></textarea>
-                        <br><br>
-                        {#submit = bouton d'envoi#}
-                        <input type="submit" value="Envoyez">
-                    </form>
-                </div>
+    <main class="displayAro">
+
+        <div>{# Formulaire d'ajout d'un nouvel auteur
+              methode get= envoi de données avec url / action = ou l'envoyer#}
+            <form method="get" action="{{ path('admin_authors_insert_ok') }}" >
+                Nom<br>
+                {#//type = quel genre de champ ( date / text ?) /name = denomination de colonne SQL visé / Value= Quoi y indiquer/ required=obligation de remplir ce champ#}
+                <input type="text" name="name" value="Nom" required="required">
+                <br>
+                Prénom<br>
+                {#type = quel genre de champ ( date / text ?) /name = denomination de colonne SQL visé / Value= Quoi y indiquer/ required=obligation de remplir ce champ#}
+                <input type="text" name="firstname" value="Prénom" required="required">
+                <br>
+                Naissance<br>
+                {#type = quel genre de champ ( date / text ?) /name = denomination de colonne SQL visé / Value= Quoi y indiquer/ required=obligation de remplir ce champ#}
+                <input type="date" name="BirhtDate" required="required">
+                <br>
+                Mort<br>
+                <input type="date" name="DeathDate"><br>
+                Biographie<br>
+                <textarea type="text" name="biography"></textarea>
+                <br><br>
+                {#submit = bouton d'envoi#}
+                <input type="submit" value="Envoyez">
+            </form>
+        </div>
+
+        <div class="listing">
+            <h1>Enregistrez <br> un nouvel <br> auteur.</h1>
         </div>
     </main>
 {% endblock %}

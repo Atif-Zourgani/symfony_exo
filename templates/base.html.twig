@@ -13,7 +13,14 @@
     <body>
         {% include 'commons/_header.html.twig' %}
         <main>
-        {% block body %}{% endblock %}
+            <div class="sticky">
+                <h2><a href="{{ path('accueil') }}">Accueil</a></h2>
+                <h2> <a href="{{ path('authors')}}">Les auteurs</a> </h2>
+                <h2> <a href="{{ path('books')}}">Les livres</a> </h2>
+            </div>
+        {% block body %}
+
+        {% endblock %}
         </main>
         {% include 'commons/_footer.html.twig' %}
         {% block javascripts %}{% endblock %}
