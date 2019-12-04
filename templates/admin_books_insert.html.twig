@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <main>
-    <div>
-        <div>
-            <h3>Entrez votre nouveau livre</h3>
+    <div class="displayAro marginForm">
+        <div class="form">
+            <form method="get" action="{{ path('admin_books_insert_ok') }}">
+                Titre<br>
+                <input type="text" name="title" required="required">
+                <br>
+                Genre<br>
+                <input type="text" name="style" required="required">
+                <br>
+                Nombre de pages<br>
+                <input type="number" name="NBpages" required="required">
+                <br>
+                Le livre est-il disponible ?<br>
+                <select name="InStock">
+                    <option value="true" >dispo</option>
+                    <option value="false" >indispo</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Envoyez">
+            </form>
         </div>
-        <div>
-                <form method="get" action="{{ path('admin_books_insert_ok') }}">
-                    Titre<br>
-                    <input type="text" name="title" required="required">
-                    <br>
-                    Genre<br>
-                    <input type="text" name="style" required="required">
-                    <br>
-                    Nombre de pages<br>
-                    <input type="number" name="NBpages" required="required">
-                    <br>
-                    Le livre est-il disponible ?<br>
-                    <select name="InStock">
-                        <option value="true" >dispo</option>
-                        <option value="false" >indispo</option>
-                    </select>
-                    <br><br>
-                    <input type="submit" value="Envoyez">
-                </form>
+        <div class="listing">
+            <h1>Enregistrez <br> un nouveau <br> livre.</h1>
         </div>
     </div>
 </main>

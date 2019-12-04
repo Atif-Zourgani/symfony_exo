@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <main class="displayAro">
+    <main class="displayAro marginForm">
 
-        <div>{# Formulaire d'ajout d'un nouvel auteur
+        <div class="form">{# Formulaire d'ajout d'un nouvel auteur
               methode get= envoi de données avec url / action = ou l'envoyer#}
             <form method="get" action="{{ path('admin_authors_insert_ok') }}" >
                 Nom<br>

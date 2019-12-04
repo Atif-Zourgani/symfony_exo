@@ -52,6 +52,7 @@ class bookController extends AbstractController
 
     }
 
+
     /**
      * @Route("/admin/books/insert", name="admin_books_insert")
      */
