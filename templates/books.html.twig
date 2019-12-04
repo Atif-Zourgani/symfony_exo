@@ -2,44 +2,50 @@
 {% block body %}
     <div class="mainrequete">
         <form action="{{ path('get_book_by_style_or_by_title') }}" method="get">
-            <input type="text" name="style" placeholder="style">
-            <input type="text" name="title" placeholder="titre">
+            {#value ( elle concerve le champ deja inscrit grace au get )
+             value = dans le site / dans la request/ dans le query / va chercher le get title#}
+            <input type="text" name="title" placeholder="titre"
+                   value="{{ app.request.query.get('title') }}">
+            <input type="text" name="style" placeholder="style"
+                   value="{{ app.request.query.get('style') }}">
             <input type="submit" value="rechercher">
         </form>
         {% for book in books %}
-        <div class="listing">
-            <a href="{{ path('book_id', {'id' : book.id}) }}" >
-                <div>
-                    <h4>{{ book.title }}</h4>
-                </div>
-                <div>
-                    Ce livre contient {{ book.NBpages }} page(s). De style {{ book.style }}.
-                </div>
-                <div>
-                    {% if book.authors is defined %}
-                        Ecrit par {{ book.authors.name }} {{ book.authors.firstname }}.
-                    {% else %}
-                        <p> L'auteur n'est pas précisé.</p>
+            <div class="listing">
+                <a href="{{ path('book_id', {'id' : book.id}) }}">
+                    <div>
+                        <h4>{{ book.title }}</h4>
+                    </div>
+                    <div>
+                        Ce livre contient {{ book.NBpages }} page(s). De style {{ book.style }}.
+                    </div>
+                    <div>
+                        {% if book.authors is defined %}
+                            Ecrit par {{ book.authors.name }} {{ book.authors.firstname }}.
+                        {% else %}
+                            <p> L'auteur n'est pas précisé.</p>
 
-                    {% endif %}
-                </div>
-                <div>
-                    {% if book.InStock == true %}
-                        <p>Le livre est disponible</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if book.InStock == true %}
+                            <p>Le livre est disponible</p>
                         {% elseif book.InStock == false %}
-                        <p>Le livre est indisponible</p>
-                    {% endif %}
+                            <p>Le livre est indisponible</p>
+                        {% endif %}
+                    </div>
+                </a>
+                {% if is_granted("ROLE_ADMIN") %}
+                <div class="displayFlexEnd">
+                    <form method="get" action="{{ path('admin_books_delete_id', {'id': book.id}) }}">
+                        <input id="suppBottom" type="submit" value="Supprimer">
+                    </form>
+                    <form method="post" action="{{ path('admin_books_update_form_id', {'id': book.id}) }}">
+                        <input id="modifBottom" type="submit" value="Modifier2">
+                    </form>
                 </div>
-            </a>
-            <div class="displayFlexEnd">
-                <form  method="get" action="{{ path('admin_books_delete_id', {'id': book.id}) }}">
-                    <input id="suppBottom" type="submit" value="Supprimer">
-                </form>
-                <form  method="post" action="{{ path('admin_books_update_form_id', {'id': book.id}) }}">
-                    <input id="modifBottom" type="submit" value="Modifier2">
-                </form>
+                {% endif %}
             </div>
-        </div>
 
         {% endfor %}
     </div>
