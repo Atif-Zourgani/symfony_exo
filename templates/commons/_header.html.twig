@@ -12,10 +12,12 @@
                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
             {% endif %}
         </div>
+        {% if is_granted("ROLE_ADMIN") %}
         <div class="displayFlexEnd">
              <a href="{{ path('admin_authors_insert')}}">Ajouter un auteur</a>
              <a href="{{ path('admin_books_insert')}}">Ajouter un livre</a>
         </div>
+        {% endif %}
 
 
     </div>

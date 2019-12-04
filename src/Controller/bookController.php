@@ -21,7 +21,7 @@ class bookController extends AbstractController
     public function allBook(BookRepository $bookRepository)
     {
         $books = $bookRepository->findAll();
-        dump($books);
+
 
 
         return $this->render('books.html.twig', ['books' => $books]);

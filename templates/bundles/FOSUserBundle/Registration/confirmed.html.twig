@@ -2,15 +2,22 @@
 {% extends 'base.html.twig' %}
 
 
+            {% trans_default_domain 'FOSUserBundle' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+            {% block body %}
 
-{% block body %}
+        <div class="displayAro">
+            <div class="form">
+                <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+                {% if targetUrl %}
+                <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                {% endif %}
+        </div>
 
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
+        <div class="listing">
+            <h2>Merci</h2>
+        </div>
+    </div>
 
 {% endblock %}
 
