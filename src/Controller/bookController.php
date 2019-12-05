@@ -15,14 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class bookController extends AbstractController
 {
+    //Création de la page books
     /**
      * @Route("/books", name="books")
      */
+    //Méthode pour recuperer tout les livres de la table book
     public function allBook(BookRepository $bookRepository)
     {
         $books = $bookRepository->findAll();
-
-
 
         return $this->render('books.html.twig', ['books' => $books]);
     }

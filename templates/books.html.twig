@@ -13,7 +13,7 @@
     </form>
 
     <div class="mainrequete">
-
+        {#Boucle for pour afficher tout les articles de la table book#}
         {% for book in books %}
             <div class="listing">
                 <a href="{{ path('book_id', {'id' : book.id}) }}">
@@ -32,6 +32,7 @@
                         {% endif %}
                     </div>
                     <div>
+                        {#If pour le stock#}
                         {% if book.InStock == true %}
                             <p>Le livre est disponible</p>
                         {% elseif book.InStock == false %}
@@ -39,7 +40,7 @@
                         {% endif %}
                     </div>
                 </a>
-                {#tafficher seulement si c'est un role admin #}
+                {#Afficher seulement si c'est un rôle admin #}
                 {% if is_granted("ROLE_ADMIN") %}
                 <div class="displayFlexEnd">
                     <form method="get" action="{{ path('admin_books_delete_id', {'id': book.id}) }}">

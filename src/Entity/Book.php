@@ -26,6 +26,7 @@ class Book
      */
     private $title;
 
+    //
     /**
      * @ORM\Column(type="integer")
      * @Assert\Positive(message="chaque livres doivent avoir au moins une page")
